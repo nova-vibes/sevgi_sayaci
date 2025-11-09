@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İlahə 💞 Nihad Sevgililik Sayacı</title>
+<style>
+  body {
+    background-color: #ffe6f0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #d63384;
+    text-align: center;
+    padding-top: 60px;
+  }
+  h1 {
+    font-size: 2.3em;
+    color: #d63384;
+  }
+  h2 {
+    font-size: 1.4em;
+    color: #ff4081;
+    margin-bottom: 20px;
+  }
+  #timer {
+    font-size: 1.3em;
+    color: #ff4081;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+  .heart {
+    font-size: 2.5em;
+    animation: pulse 1s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); color: #ff80ab; }
+    50% { transform: scale(1.3); color: #d63384; }
+    100% { transform: scale(1); color: #ff80ab; }
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #a33b78;
+  }
+</style>
+</head>
+<body>
+  <h1>💖 İlahə 💞 Nihad 💖</h1>
+  <h2>Sevgililik Sayacı</h2>
+  <div id="timer">Yüklənir...</div>
+  <div class="heart">❤️</div>
+  <footer>💌 Hazırlayan: Rəsulzadə 💌<br>Sevgililik başladı: 18 Oktyabr 2025 💌</footer>
+
+<script>
+  // Sevgililiyin başladığı tarix (il, ay - 1, gün, saat, dəqiqə)
+  const startDate = new Date(2025, 9, 18, 0, 0, 0); // Oktyabr = 9
+
+  function updateTimer() {
+    const now = new Date();
+    const diff = now - startDate;
+
+    if (diff < 0) {
+      document.getElementById("timer").innerHTML = "⏳ Sevgililiyin başlanmasına hələ vaxt var 💕";
+      return;
+    }
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+
+    const remDays = days % 7;
+    const remHours = hours % 24;
+    const remMinutes = minutes % 60;
+    const remSeconds = seconds % 60;
+
+    let text = İlahə 💞 Nihad artıq birlikdə 💕<br>
+      ${weeks} həftə, ${remDays} gün,<br>
+      ${remHours} saat, ${remMinutes} dəqiqə və ${remSeconds} saniyədir 💐;
+
+    if (days >= 30) {
+      text += <br><br>🎉 Təbriklər! Artıq 1 ayı keçmisiniz! ❤️;
+    }
+
+    document.getElementById("timer").innerHTML = text;
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+</body>
+</html>
