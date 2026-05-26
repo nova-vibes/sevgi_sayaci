@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İlahə & Nihad | Sonsuz Sevgi</title>
+    <style>
+        /* Ümumi Tənzimləmələr */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff758c, #ff7eb3, #fe91ca);
+            background-size: 200% 200%;
+            animation: gradientBG 10s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Arxa fondakı uçan ürəklər */
+        .bg-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Əsas Kart */
+        .wrapper {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px 35px;
+            width: 100%;
+            max-width: 460px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 
+                        0 0 50px rgba(255, 71, 126, 0.2) inset;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            z-index: 2;
+            transform: scale(1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .wrapper:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 
+                        0 0 60px rgba(255, 71, 126, 0.3) inset;
+        }
+
+        /* Adlar və Başlıq */
+        .names-title {
+            font-size: 2.2rem;
+            background: linear-gradient(to right, #ff1a53, #ff477e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .counter-title {
+            color: #7d7d7d;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            font-weight: 600;
+        }
+
+        /* Böyük Gün Sayı Kartı */
+        .main-days-box {
+            background: linear-gradient(135deg, #ff477e, #ff7096);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(255, 71, 126, 0.3);
+        }
+
+        .main-days-box strong {
+            font-size: 2.2rem;
+            display: block;
+            font-weight: 800;
+            margin-bottom: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Kiçik Zaman Blokları */
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .time-card {
+            background: white;
+            padding: 12px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 1px solid rgba(255, 112, 150, 0.15);
+            transition: transform 0.2s;
+        }
+
+        .time-card:hover {
+            transform: scale(1.05);
+            border-color: #ff477e;
+        }
+
+        .time-card span {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ff477e;
+        }
+
+        .time-card label {
+            font-size: 0.75rem;
+            color: #8c8c8c;
+            font-weight: 500;
+        }
+
+        /* Dinamik Progress Bar */
+        .progress-container {
+            background: #ffe5ec;
+            border-radius: 10px;
+            height: 8px;
+            width: 100%;
+            margin: 15px 0 25px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(to right, #ff477e, #ff85a2);
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Bilgi Mesajları */
+        .info-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-left: 4px solid #ff477e;
+            padding: 15px;
+            border-radius: 0 15px 15px 0;
+            text-align: left;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.01);
+        }
+
+        .info-line {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-line:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: #ff1a53;
+            font-weight: 700;
+        }
+
+        /* İmza və Tarix */
+        .footer-zone {
+            border-top: 1px dashed #ffd0dd;
+            padding-top: 20px;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .author-name {
+            color: #ff477e;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        /* Mərkəzi döyünən ürək */
+        .center-heart {
+            font-size: 2.5rem;
+            display: inline-block;
+            animation: beat 1s infinite alternate;
+            margin-bottom: 15px;
+        }
+
+        @keyframes beat {
+            to { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-hearts" id="hearts-layer"></div>
+
+    <div class="wrapper">
+        <div class="names-title">İlahə ❤️ Nihad</div>
+        <div class="counter-title">Sonsuz Sevgi Sayacı</div>
+
+        <div class="main-days-box">
+            <strong id="total-days">0</strong>
+            Gün Birlikdə
+        </div>
+
+        <div class="time-grid">
+            <div class="time-card">
+                <span id="card-weeks">0</span>
+                <label>Həftə</label>
+            </div>
+            <div class="time-card">
+                <span id="card-days">0</span>
+                <label>Gün</label>
+            </div>
+            <div class="time-card">
+                <span id="card-hours">0</span>
+                <label>Saat</label>
+            </div>
+        </div>
+
+        <div class="center-heart">❤️</div>
+
+        <div class="info-card">
+            <div class="info-line">
+                🎉 <span>Münasibətiniz tam <span class="highlight" id="completed-months">0</span> ayı geridə qoydu!</span>
+            </div>
+            <div class="info-line">
+                🚀 <span>Hazırda <span class="highlight" id="current-month-num">0</span>-ci ayın içindəsiniz.</span>
+            </div>
+            <div class="info-line">
+                📅 <span>Yeni aya son <span class="highlight" id="days-left-num">0</span> gün!</span>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="month-progress"></div>
+        </div>
+
+        <div class="footer-zone">
+            <p>✉️ <span class="author-name">Səni Sevirəm❤️</span> ✉️</p>
+            <p style="margin-top: 5px; font-size: 0.8rem; color: #aaa;">Xoşbəxtlik tarixi: 18 Oktyabr 2025</p>
+        </div>
+    </div>
+
+    <script>
+        const startDate = new Date('2025-10-18T00:00:00');
+
+        function updateLuxuryCounter() {
+            const now = new Date();
+            const diffTime = now - startDate;
+            if (diffTime < 0) return;
+
+            // Gün hesablamaları
+            const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const totalHours = Math.floor(diffTime / (1000 * 60 * 60));
+            
+            const currentHours = totalHours % 24;
+            const weeks = Math.floor(totalDays / 7);
+            const remainingDays = totalDays % 7;
+
+            // Ana məlumatları ekrana basırıq
+            document.getElementById('total-days').innerText = totalDays;
+            document.getElementById('card-weeks').innerText = weeks;
+            document.getElementById('card-days').innerText = remainingDays;
+            document.getElementById('card-hours').innerText = currentHours;
+
+            // --- TAM DƏQİQ AY VƏ ARTIQ İL ALQORİTMİ ---
+            let completedMonths = 0;
+            let tempDate = new Date(startDate);
+
+            // Ay tamamlanmalarını yoxlayırıq (Fevral 28/29, Yanvar 31 daxil)
+            while (true) {
+                let nextMonth = new Date(tempDate);
+                nextMonth.setMonth(nextMonth.getMonth() + 1);
+                
+                if (nextMonth <= now) {
+                    completedMonths++;
+                    tempDate = nextMonth;
+                } else {
+                    break;
+                }
+            }
+
+            // Növbəti ayın başlama tarixi və bu ayın ümumi gün sayı
+            let nextMilestoneMonth = new Date(tempDate);
+            nextMilestoneMonth.setMonth(nextMilestoneMonth.getMonth() + 1);
+            
+            const thisMonthTotalMs = nextMilestoneMonth - tempDate;
+            const currentPassedMs = now - tempDate;
+            
+            // Ayın tamamlanma faizi (Progress Bar üçün)
+            let progressPercent = (currentPassedMs / thisMonthTotalMs) * 100;
+            document.getElementById('month-progress').style.width = `${progressPercent}%`;
+
+            // Qalan gün sayı
+            const timeUntilNextMonth = nextMilestoneMonth - now;
+            const daysLeft = Math.ceil(timeUntilNextMonth / (1000 * 60 * 60 * 24));
+
+            // Ekrana məlumatların yazılması
+            document.getElementById('completed-months').innerText = completedMonths; // Tamamlanan aylar (Məsələn: Mayda 7)
+            document.getElementById('current-month-num').innerText = completedMonths + 1; // Cari irəliləyən ay (Məsələn: Mayda 8-ci ay)
+            document.getElementById('days-left-num').innerText = daysLeft;
+        }
+
+        // Arxa fona uçan dekorativ ürəklər əlavə edən funksiya
+        function createBackgroundHearts() {
+            const layer = document.getElementById('hearts-layer');
+            for (let i = 0; i < 15; i++) {
+                let heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.color = 'rgba(255, 255, 255, 0.4)';
+                heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+                heart.style.opacity = Math.random() * 0.5 + 0.2;
+                layer.appendChild(heart);
+            }
+        }
+
+        setInterval(updateLuxuryCounter, 1000);
+        updateLuxuryCounter();
+        createBackgroundHearts();
+    </script>
+</body>
+</html>
